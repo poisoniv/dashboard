@@ -13,28 +13,45 @@ org_id = file.read()
 #print(org_id)
 
 #Retrieve list of networks in organization
-networks = meraki.getnetworklist(api_key, org_id, suppressprint=True)
+def get_networks(api_key, org_id) :
+    networks = meraki.getnetworklist(api_key, org_id, suppressprint=True)
+    return networks
+
+
+#networks = meraki.getnetworklist(api_key, org_id, suppressprint=True)
 
 #Create output file named output.txt
-output_file = open("output.txt", "w")
+#output_file = open("output.txt", "w")
 
 #iterate through each device in each network, check status of device/uplink and set variable 'network_status' to "Down" if applicable
 #if device/uplink is down, skip rest of loop, print findings, and continue with next network
-for network in networks :
+def get_network_status(network) :
     network_status = "Up";
     devices = meraki.getnetworkdevices(api_key, network['id'], suppressprint=True)
     for device in devices:
-        if network_status == "Down" : break
-        uplinks = meraki.getdeviceuplink(api_key, network['id'], device['serial'],suppressprint=True)
-        for uplink in uplinks :
-            if (uplink['status'] == "Failed") :
+        if network_status == "Down": break
+        uplinks = meraki.getdeviceuplink(api_key, network['id'], device['serial'], suppressprint=True)
+        for uplink in uplinks:
+            if (uplink['status'] == "Failed"):
                 network_status = "Down"
                 break
 
+
+# for network in networks :
+#     network_status = "Up";
+#     devices = meraki.getnetworkdevices(api_key, network['id'], suppressprint=True)
+#     for device in devices:
+#         if network_status == "Down" : break
+#         uplinks = meraki.getdeviceuplink(api_key, network['id'], device['serial'],suppressprint=True)
+#         for uplink in uplinks :
+#             if (uplink['status'] == "Failed") :
+#                 network_status = "Down"
+#                 break
+
     #print status of each network to console and output.txt
-    print(network['name'] + " - " + network_status)
-    output_file.write(network['name'] + " - " + network_status + "\n")
+#     print(network['name'] + " - " + network_status)
+#     output_file.write(network['name'] + " - " + network_status + "\n")
+#
+# output_file.close()
 
-output_file.close()
-
-print("Executed successfully...")
+#print("Executed successfully...")
