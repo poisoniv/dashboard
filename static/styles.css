@@ -1,0 +1,16 @@
+.status_up {
+    float: left;
+	border-radius: 50%;
+	width: 15px;
+	height: 15px;
+    background-color: #0dec0d;
+	/* width and height can be anything, as long as they're equal */
+}
+.status_down {
+    float: left;
+	border-radius: 50%;
+	width: 15px;
+	height: 15px;
+    background-color: #ec0d0d;
+	/* width and height can be anything, as long as they're equal */
+}

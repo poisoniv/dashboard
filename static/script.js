@@ -14,8 +14,15 @@ function network_status_handler(network_statuses){
     var networkTable = $("#network_status")
     networkTable.html(networkTableHead)
 
+
     network_statuses.forEach(function(network){
-        networkTable.html(networkTable.html()+'<tr><th>'+network.name+'</th><th>'+network.status+'</th></tr>')
+        var status = 'status_'
+        if (network.status == "Up"){
+             status += 'up'
+        } else {
+             status +='down'
+        }
+        networkTable.html(networkTable.html()+'<tr><th>'+network.name+'</th><th><div class="'+status+'"></div>'+network.status+'</th></tr>')
     })
 
      $('#last_updated').html("Last Updated: "+formatDate(new Date))
