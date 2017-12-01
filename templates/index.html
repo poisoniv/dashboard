@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>
-    <!--Press to run: <button>Press</button>-->
-    <form action="/forward/" method="post">
-    <button name="forwardBtn" type="submit">Forward</button>
-    {{ forward_message }}
-</form>
-</h1>
+    <div id="network_status_container">
+        <p id="last_updated"></p>
+        <table id="network_status">
+            <tr>
+                <th>Network Name</th>
+                <th>Status</th>
+            </tr>
+        </table>
+    </div>
 {% endblock %}
