@@ -29,12 +29,13 @@ def get_network_status(network) :
     network_status = "Up";
     devices = meraki.getnetworkdevices(api_key, network['id'], suppressprint=True)
     for device in devices:
-        if network_status == "Down": break
+        if network_status == "Down": return network_status
         uplinks = meraki.getdeviceuplink(api_key, network['id'], device['serial'], suppressprint=True)
         for uplink in uplinks:
             if (uplink['status'] == "Failed"):
                 network_status = "Down"
-                break
+                return network_status
+    return network_status
 
 
 # for network in networks :
