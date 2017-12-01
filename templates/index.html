@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>
+    <!--Press to run: <button>Press</button>-->
+    <form action="/forward/" method="post">
+    <button name="forwardBtn" type="submit">Forward</button>
+    {{ forward_message }}
+</form>
+</h1>
+{% endblock %}
