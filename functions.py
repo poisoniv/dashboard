@@ -24,13 +24,13 @@ def get_network_status(network):
     network_status = "Up";
     devices = meraki.getnetworkdevices(config['api_key'], network['id'], suppressprint=True)
     for device in devices:
-        if network_status == "Down": return network_status
+        if network_status == "Down": return (network['name'], network_status)
         uplinks = meraki.getdeviceuplink(config['api_key'], network['id'], device['serial'], suppressprint=True)
         for uplink in uplinks:
             if (uplink['status'] == "Failed"):
                 network_status = "Down"
-                return network_status
-    return uplinks
+                return (network['name'], network_status)
+    return (network['name'], network_status)
 
 
 # for network in networks :
@@ -52,4 +52,4 @@ def get_network_status(network):
 
 #print("Executed successfully...")
 
-print(fetch())
+#print(fetch())
