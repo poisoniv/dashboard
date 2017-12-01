@@ -1,36 +1,31 @@
 from meraki import meraki
+from config import *
 
-#Pull API Key from file
-file = open("api_key.txt", "r")
-api_key = file.read()
-#api_key = [insert here]
-#print(api_key)
 
-#pull Org ID from file
-file = open("org_id.txt", "r")
-org_id = file.read()
-#org_id = '316511'
-#print(org_id)
+def fetch():
+    networks = get_networks()
+    network_statuses = []
+    for network in networks:
+        network_statuses.append(get_network_status(network))
+    return network_statuses
 
-#Retrieve list of networks in organization
-def get_networks(api_key, org_id) :
-    networks = meraki.getnetworklist(api_key, org_id, suppressprint=True)
+
+def get_networks():
+    networks = meraki.getnetworklist(config['api_key'], config['org_id'], suppressprint=True)
     return networks
 
 
-#networks = meraki.getnetworklist(api_key, org_id, suppressprint=True)
+# Create output file named output.txt
+# output_file = open("output.txt", "w")
 
-#Create output file named output.txt
-#output_file = open("output.txt", "w")
-
-#iterate through each device in each network, check status of device/uplink and set variable 'network_status' to "Down" if applicable
-#if device/uplink is down, skip rest of loop, print findings, and continue with next network
-def get_network_status(network) :
+# iterate through each device in each network, check status of device/uplink and set variable 'network_status' to
+# "Down" if applicable if device/uplink is down, skip rest of loop, print findings, and continue with next network
+def get_network_status(network):
     network_status = "Up";
-    devices = meraki.getnetworkdevices(api_key, network['id'], suppressprint=True)
+    devices = meraki.getnetworkdevices(config['api_key'], network['id'], suppressprint=True)
     for device in devices:
         if network_status == "Down": return network_status
-        uplinks = meraki.getdeviceuplink(api_key, network['id'], device['serial'], suppressprint=True)
+        uplinks = meraki.getdeviceuplink(config['api_key'], network['id'], device['serial'], suppressprint=True)
         for uplink in uplinks:
             if (uplink['status'] == "Failed"):
                 network_status = "Down"
@@ -56,3 +51,5 @@ def get_network_status(network) :
 # output_file.close()
 
 #print("Executed successfully...")
+
+print(fetch())

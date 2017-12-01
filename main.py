@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify, url_for
 
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -12,6 +13,13 @@ def move_forward():
     print("Hey Cliff")
     forward_message = "Moving Forward..."
     return render_template('index.html', message=forward_message);
+
+@app.route("/fetch_all/", methods=['GET'])
+def fetch_all():
+    resp = {"name": "tom"}
+    return jsonify(resp)
+
+
 
 #@app.route("/functions")
 #def functions():
