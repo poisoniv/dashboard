@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, url_for
-
+from functions import fetch
 
 app = Flask(__name__)
 
@@ -16,7 +16,7 @@ def move_forward():
 
 @app.route("/fetch_all/", methods=['GET'])
 def fetch_all():
-    resp = {"name": "tom"}
+    resp = fetch()
     return jsonify(resp)
 
 

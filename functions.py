@@ -30,7 +30,7 @@ def get_network_status(network):
             if (uplink['status'] == "Failed"):
                 network_status = "Down"
                 return network_status
-    return network_status
+    return uplinks
 
 
 # for network in networks :
