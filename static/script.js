@@ -11,7 +11,7 @@ function formatDate(date) {
 
 const NetworkStatus = {
   settings: {
-    updateInterval: 30,
+    updateInterval: 60,
     networkTableHead: '<thead class="dark"><tr><th>Network Name</th><th>Status</th></tr></thead>',
   },
   el: {
