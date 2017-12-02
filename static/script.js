@@ -12,7 +12,7 @@ function formatDate(date) {
 const NetworkStatus = {
   settings: {
     updateInterval: 30,
-    networkTableHead: '<tr><th>Network Name</th><th>Status</th></tr>',
+    networkTableHead: '<thead class="dark"><tr><th>Network Name</th><th>Status</th></tr></thead>',
   },
   el: {
     lastUpdatedDisplay: $('#last_updated'),
@@ -23,11 +23,12 @@ const NetworkStatus = {
     this.startTimer();
   },
   startTimer() {
-    setInterval(this.fetch_network_status, this.settings.updateInterval * 1000);
+    setInterval(this.fetch_network_status.bind(this), this.settings.updateInterval * 1000);
   },
   fetch_network_status() {
     this.el.lastUpdatedDisplay.html('Last Updated: Updating now...');
     $.ajax({
+      async: true,
       url: '/fetch_all',
     }).done(this.network_status_handler.bind(this));
   },

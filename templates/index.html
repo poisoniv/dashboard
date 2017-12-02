@@ -1,12 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
-    <div id="network_status_container">
-        <p id="last_updated"></p>
-        <table id="network_status">
-            <tr>
-                <th>Network Name</th>
-                <th>Status</th>
-            </tr>
-        </table>
+        <div class="row pt20">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <div id="network_status_container">
+
+                <table class="table table-hover" id="network_status">
+                    <thead class="dark">
+                    <tr scope="row">
+                        <th scope="col">Network Name</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <p id="last_updated"></p>
+        </div>
+        <div class="col-lg-4"></div>
     </div>
 {% endblock %}
