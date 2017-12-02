@@ -1,6 +1,8 @@
 from meraki import meraki
 from config import *
 
+# todo: Use websockets to push status to clients.
+
 
 def fetch():
     networks = get_networks()
